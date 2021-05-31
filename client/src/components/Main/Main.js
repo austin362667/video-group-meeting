@@ -29,23 +29,8 @@ const Main = (props) => {
     const userName = userRef.current.value;
 
     if (!roomName || !userName) {
-
-      if(room != 0){
-        setErr(true);
-        setErrMsg('Enter User Name');
-        if(room == 1){
-          socket.emit('BE-check-user', { roomId: 'just-chillin', userName });
-        }else if(room == 2){
-          socket.emit('BE-check-user', { roomId: 'dnd-night', userName });
-        }else if(room == 3){
-          socket.emit('BE-check-user', { roomId: 'omni-club', userName });
-        }
-      }else{
-        setErr(true);
-        setErrMsg('Enter Room Name or User Name');
-  
-      }
-
+      setErr(true);
+      setErrMsg('Enter Room Name or User Name');
     } else {
       socket.emit('BE-check-user', { roomId: roomName, userName });
     }
@@ -61,12 +46,12 @@ const Main = (props) => {
         <Label htmlFor="userName">User Name</Label>
         <Input type="text" id="userName" ref={userRef} />
       </Row>
-      <JoinButton onClick={clickJoin(0)}> Join </JoinButton>
+      <JoinButton onClick={clickJoin}> Join </JoinButton>
       {err ? <Error>{errMsg}</Error> : null}
       <h3>Trending Room</h3>
-      <JoinButton onClick={clickJoin(1)}> 網飛與秋 </JoinButton>
-      <JoinButton onClick={clickJoin(2)}> 夜讀區 </JoinButton>
-      <JoinButton onClick={clickJoin(3)}> 暢飲包 </JoinButton>
+      <JoinButton onClick={ ()=>{roomRef.current.value = 'just-chillin'} }> 網飛與秋 </JoinButton>
+      <JoinButton onClick={ ()=>{roomRef.current.value = 'dnd-night'} }> 夜讀區 </JoinButton>
+      <JoinButton onClick={ ()=>{roomRef.current.value = 'omni-club'} }> 暢飲包 </JoinButton>
     </MainContainer>
   );
 };
