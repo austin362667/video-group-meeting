@@ -43,7 +43,7 @@ app.get('/ping', (req, res) => {
 // Socket
 io.on('connection', (socket) => {
   console.log(`New User connected: ${socket.id}`);
-  console.log(io.rooms);
+  // console.log(io.sockets.adapter.rooms);
 
   socket.on('disconnect', () => {
     socket.disconnect();
