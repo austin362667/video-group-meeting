@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 // const http = require('http').createServer(app);
-const io = require('socket.io')(http);
 const PORT = process.env.PORT || 443;
 const path = require('path');
 
@@ -16,6 +15,7 @@ var options = {
 
 
 const server = https.createServer(options, app);
+const io = require('socket.io')(server);
 
 
 
