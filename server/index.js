@@ -2,8 +2,17 @@ const express = require('express');
 const app = express();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 443;
 const path = require('path');
+
+const fs = require('fs');
+const https = require('https')
+
+var options = {
+  key: fs.readFileSync('/etc/letsencrypt/live/lattemall.company/privkey.pem'),
+  ca: [fs.readFileSync('/etc/letsencrypt/live/lattemall.company/fullchain.pem')],
+  cert: fs.readFileSync('/etc/letsencrypt/live/lattemall.company/fullchain.pem')
+};
 
 let socketList = {};
 
@@ -111,6 +120,6 @@ io.on('connection', (socket) => {
   });
 });
 
-http.listen(PORT, () => {
+https.listen(options, PORT, () => {
   console.log('Connected : 3001');
 });
