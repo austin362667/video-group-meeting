@@ -48,10 +48,10 @@ const Main = (props) => {
       </Row>
       <JoinButton onClick={clickJoin}> Join </JoinButton>
       {err ? <Error>{errMsg}</Error> : null}
-      <h1>Trending Room</h1>
-      <h3 href={'/room/just-chillin'}>網飛與秋</h3>
-      <h3 href={'/room/dnd-night'}>夜讀區</h3>
-      <h3 href={'/room/omni-club'}>暢飲包</h3>
+      <h3>Trending Room</h3>
+      <a href={'/room/just-chillin'}>網飛與秋</a>
+      <a href={'/room/dnd-night'}>夜讀區</a>
+      <a href={'/room/omni-club'}>暢飲包</a>
     </MainContainer>
   );
 };
