@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const http = require('http').createServer(app);
+// const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 const PORT = process.env.PORT || 443;
 const path = require('path');
@@ -13,6 +13,11 @@ var options = {
   ca: [fs.readFileSync('/etc/letsencrypt/live/lattemall.company/fullchain.pem')],
   cert: fs.readFileSync('/etc/letsencrypt/live/lattemall.company/fullchain.pem')
 };
+
+
+const server = https.createServer(options, app);
+
+
 
 let socketList = {};
 
@@ -120,6 +125,6 @@ io.on('connection', (socket) => {
   });
 });
 
-https.listen(options, PORT, () => {
+server.listen(options, PORT, () => {
   console.log('Connected : 3001');
 });
